@@ -9,7 +9,7 @@ public class Manager {
     }
 
     public Manager(int managerLimit) {
-
+        this.managerLimit = managerLimit;
     }
 
     private String[] items = new String[0];

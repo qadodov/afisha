@@ -20,9 +20,57 @@ class ManagerTest {
     }
 
     @Test
-    void findLast() {
-        Manager manager = new Manager(10);
-        manager.setTitles(new String[] {"Бладшот", "Вперед", "Отель", "Джентельмены", "Тролли"});
+    void findLastSetToLimit() {
+        Manager manager = new Manager();
+        manager.addMovie("Фильм1");
+        manager.addMovie("Фильм2");
+        manager.addMovie("Фильм3");
+        manager.addMovie("Фильм4");
+        manager.addMovie("Фильм5");
+        manager.addMovie("Фильм6");
+        manager.addMovie("Фильм7");
+        manager.addMovie("Фильм8");
+        manager.addMovie("Фильм9");
+        manager.addMovie("Фильм10");
 
+        String[] expected = {"Фильм10", "Фильм9", "Фильм8", "Фильм7", "Фильм6", "Фильм5", "Фильм4", "Фильм3", "Фильм2", "Фильм1"};
+        String[] actual = manager.findLast();
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void findLastSetUnderLimit() {
+        Manager manager = new Manager(3);
+        manager.addMovie("Бладшот");
+        manager.addMovie("Вперед");
+        manager.addMovie("Отель");
+        manager.addMovie("Джентельмены");
+        manager.addMovie("Тролли");
+
+        String[] expected = {"Тролли", "Джентельмены", "Отель"};
+        String[] actual = manager.findLast();
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void findLastSetoverLimit() {
+        Manager manager = new Manager(2);
+        manager.addMovie("Фильм1");
+        manager.addMovie("Фильм2");
+        manager.addMovie("Фильм3");
+        manager.addMovie("Фильм4");
+        manager.addMovie("Фильм5");
+        manager.addMovie("Фильм6");
+        manager.addMovie("Фильм7");
+        manager.addMovie("Фильм8");
+        manager.addMovie("Фильм9");
+        manager.addMovie("Фильм10");
+
+        String[] expected = {"Фильм10", "Фильм9"};
+        String[] actual = manager.findLast();
+
+        assertArrayEquals(expected, actual);
     }
 }
